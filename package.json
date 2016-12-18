@@ -1,8 +1,8 @@
 {
-    "name": "casper",
+    "name": "casper mk2",
     "description": "The default personal blogging theme for Ghost. Beautiful, minimal and responsive.",
-    "demo": "https://demo.ghost.io",
-    "version": "1.3.4",
+    "demo": "https://bluescreen.club",
+    "version": "1.3.5",
     "engines": {
         "ghost": ">=0.9.0 <1.0.0"
     },
@@ -12,9 +12,9 @@
         "mobile": "assets/screenshot-mobile.jpg"
     },
     "author": {
-        "name": "Ghost Foundation",
-        "email": "hello@ghost.org",
-        "url": "https://ghost.org"
+        "name": "Ghost Foundation and Ashish Thomas",
+        "email": "ufoundashish@gmail.com",
+        "url": "https://ashtricks.com"
     },
     "gpm": {
         "type": "theme",
@@ -29,7 +29,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/TryGhost/Casper.git"
+        "url": "https://github.com/reach2ashish/Casper.git"
     },
     "bugs": "https://github.com/TryGhost/Casper/issues",
     "contributors": "https://github.com/TryGhost/Casper/graphs/contributors"
