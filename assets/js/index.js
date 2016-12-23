@@ -21,6 +21,9 @@
         });
 
     });
+//Function for Easter bug
+console.log("Hi there! Welcome to BLUESCREEN.CLUB");
+console.log("blscr\(\"Your query\"\)");
 
     // Arctic Scroll by Paul Adam Davis
     // https://github.com/PaulAdamDavis/Arctic-Scroll
@@ -54,3 +57,80 @@
 
     };
 })(jQuery);
+
+
+
+//BLUESCREEN CHAT AGENT RIGHT HERE
+
+var accessToken = "373956f891b94397a092ee78dea46ff4",
+    baseUrl = "https://api.api.ai/v1/",
+    $speechInput,
+    $recBtn,
+    recognition,
+    messageRecording = "Recording...",
+    messageCouldntHear = "I couldn't hear you, could you say that again?",
+    messageInternalError = "Oh no, there has been an internal server error",
+    messageSorry = "I'm sorry, I don't have the answer to that yet.";
+//BLUESCREEN CHAT AGENT RIGHT HERE
+function blscr(text) {
+  $.ajax({
+    type: "POST",
+    url: baseUrl + "query",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    headers: {
+      "Authorization": "Bearer " + accessToken
+    },
+    data: JSON.stringify({query: text, lang: "en", sessionId: "runbarry"}),
+
+    success: function(data) {
+      prepareResponse(data);
+    },
+    error: function() {
+      respond(messageInternalError);
+    }
+  });
+}
+
+function prepareResponse(val) {
+  var debugJSON = JSON.stringify(val, undefined, 2),
+      spokenResponse = val.result.speech;
+      if(val.result["action"]=="input.unknown")
+      {
+      goToStack(val.result["resolvedQuery"]);
+    }
+      else if (val.result.metadata["intentName"]=="can you give me a programming question")
+      {generateQuestion();}
+
+    else{
+    console.log(spokenResponse);
+    if (val.result.metadata["intentName"]=="stackoverflow")
+    {goToStack(val.result["resolvedQuery"]);}
+      }
+ }
+
+
+
+function generateQuestion()
+{ var theurl='http://codeforces.com/problemset/problem/';
+
+   $.ajax({
+    type: "GET",
+    url: 'http://codeforces.com/api/problemset.recentStatus?count=1',
+
+    dataType: "json",
+    success: function(data) {
+      theurl+=(data.result[0]["problem"]["contestId"])+"/"+data.result[0]["problem"]["index"];
+      console.log(theurl);
+    },
+    error: function() {
+      respond(messageInternalError);
+    }
+  });
+}
+function goToStack(query1)
+{
+  var baseurl='https://stackoverflow.com/search?q=';
+  var res = query1.replace(/ /gi, "+");
+  console.log(baseurl+res);
+}
